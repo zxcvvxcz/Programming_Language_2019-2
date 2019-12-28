@@ -1,0 +1,6 @@
+(* test case - Unbound *)
+
+if ( 1 = true) then write 100
+else write 200
+
+(* Output : prints out "0\n55\n" *)

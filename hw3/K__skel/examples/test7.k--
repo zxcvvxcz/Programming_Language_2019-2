@@ -1,0 +1,9 @@
+(* test case - while loop *)
+
+let i := 1 in
+let sum := 0 in
+write sum;
+while (i < 11) do (sum := sum + i; i := i + 1);
+write sum
+
+(* Output : prints out "0\n55\n" *)

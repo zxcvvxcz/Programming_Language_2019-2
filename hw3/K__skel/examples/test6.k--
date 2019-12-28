@@ -1,0 +1,8 @@
+(* test case 6 : while *)
+
+let i := 1 in
+while (i < 5) do (
+  i := i + 1;
+  write i)
+
+(* Output : prints out "5\n" *)

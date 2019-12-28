@@ -1,0 +1,5 @@
+(* test case - Unbound *)
+
+write i
+
+(* Output : prints out "Error" *)

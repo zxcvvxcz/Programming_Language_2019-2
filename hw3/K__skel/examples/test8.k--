@@ -1,0 +1,9 @@
+(* test case - while loop factorial *)
+
+let i := 1 in
+let fac := 1 in
+write fac;
+while (i < 7) do (fac := fac * i; i := i + 1);
+write fac
+
+(* Output : prints out "0\n55\n" *)
