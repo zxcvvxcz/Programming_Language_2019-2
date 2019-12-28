@@ -1,0 +1,22 @@
+== Converted Program ==
+fn x_5 => fn x_6 => (fn x_26 => fn x_27 => (x_26) (fn x_2 => fn x_28 => fn x_29 => (fn x_47 => fn x_48 => (x_47) (fn x_4 => fn x_49 => fn x_50 => ((fn x_54 => fn x_55 => (fn x_60 => fn x_61 => (x_60) (x_4)) ((fn x_56 => ((fn x_58 => fn x_59 => (x_58) (10)) (fn x_57 => (x_56) ((x_57) ((x_54) (x_55))))) (x_55)) (x_55))) (x_49)) (fn x_51 => 
+ if x_51 then 
+  ((fn x_52 => fn x_53 => (x_52) (200)) (x_51)) ((x_49) (x_50))
+ else
+  (x_50) (x_51)
+))) ((fn x_30 => ((fn x_32 => fn x_33 => (x_32) (fn x_3 => fn x_34 => fn x_35 => ((fn x_39 => fn x_40 => (fn x_45 => fn x_46 => (x_45) (x_2)) ((fn x_41 => ((fn x_43 => fn x_44 => (x_43) (x_3)) (fn x_42 => (x_41) ((x_42) ((x_39) (x_40))))) (x_40)) (x_40))) (x_34)) (fn x_36 => 
+ if x_36 then 
+  ((fn x_37 => fn x_38 => (x_37) (100)) (x_36)) ((x_34) (x_35))
+ else
+  (x_35) (x_36)
+))) (fn x_31 => (x_30) ((x_31) ((x_28) (x_29))))) (x_29)) (x_29)))) ((fn x_7 => ((fn x_9 => fn x_10 => (x_9) (fn x_1 => fn x_11 => fn x_12 => ((fn x_18 => ((fn x_24 => fn x_25 => (x_24) (x_1)) (fn x_20 => ((fn x_22 => fn x_23 => (x_22) (9)) (fn x_21 => (x_18) ((x_20 = x_21)))) (x_19))) (x_19)) (fn x_13 => 
+ if x_13 then 
+  ((fn x_16 => fn x_17 => (x_16) (50)) (x_11)) (x_12)
+ else
+  ((fn x_14 => fn x_15 => (x_14) (77)) (x_11)) (x_12)
+)) (x_12))) (fn x_8 => (x_7) ((x_8) ((x_5) (x_6))))) (x_6)) (x_6))
+== Running input program with xexp Interpreter ==
+200
+[Valid] Exception sugar removed successfully
+== Running converted program with xexp Interpreter ==
+Program is not evaluated to a number
