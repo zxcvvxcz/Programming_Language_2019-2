@@ -1,0 +1,88 @@
+let proc leaf (i) =
+  let tree := {left := unit, v := i, right := unit, height := 0} in
+  tree
+in
+let proc makeLtree (i, lt) =
+   let tree := {left := lt, v := i, right := leaf (unit), height := (lt.height + 1)} in
+   tree
+in
+let proc makeRtree (i, rt) =
+    let tree := {left := leaf (unit), v := i, right := rt, height := (rt.height + 1)} in
+    tree
+in
+let proc isEmpty (t) =
+    if t = unit then true else(
+    if (t.v = unit) then true
+    else false)
+in
+let proc rTree (t) =
+    if (isEmpty (t)) then unit
+    else if (t.right = unit) then unit else t.right
+in
+let proc lTree (t) =
+    if (isEmpty (t)) then unit
+    else if (t.left = unit) then unit else t.left
+in
+let proc nodeVal (t) =
+    t.v
+in
+let proc setHeight (h, tree) =
+    if (isEmpty (tree)) then unit else tree.height := h - 1;
+    if (isEmpty (lTree (tree))) then unit else setHeight (h - 1, lTree (tree));
+    if (isEmpty (rTree (tree))) then unit else setHeight (h - 1, rTree (tree));
+    tree
+in
+let proc makeTree (i, lt, rt) =
+    if (rt.height < lt.height) then (
+        let h := lt.height + 1 in
+        let tree := {left := lt, v := i, right := setHeight(h, rt), height := h} in
+        tree
+    )
+    else (
+        
+        let h := (rt.height + 1) in
+        let tree := {left := setHeight(h, lt), v := i, right := rt, height := h} in
+        tree
+    )
+in
+
+let proc dft (t) =
+    if (isEmpty (t)) then unit
+    else(
+        write t.v;
+        dft (lTree(t));
+        dft (rTree(t)))
+in
+let proc dft_height (t, h) =
+    if (isEmpty (t)) then unit
+    else
+    (if (t.height = h) then write t.v else unit;
+    dft_height (lTree(t), h);
+    dft_height (rTree(t), h))
+in
+let proc bft (t) =
+    let h_curr := t.height in
+    
+    while (not (h_curr < 0)) do (
+        dft_height (t, h_curr);
+        h_curr := h_curr - 1
+    )
+in
+
+
+(
+let tree := makeTree(1, makeTree( 2, makeLtree( 4, leaf (8) ) , makeRtree( 5, leaf (9)  ) )  ,  makeTree(  3, leaf (6) , leaf (7) ) ) in
+write tree.height;
+write lTree (tree).height;
+write lTree (lTree (tree)).height;
+write lTree (rTree (tree)).height;
+write (11111);
+
+dft (tree);
+
+write (22222);
+
+bft (tree);
+
+
+write (2019) )

@@ -1,0 +1,4 @@
+(* write *)
+
+let x := 1 in
+write (write x := x + 1)

@@ -1,0 +1,57 @@
+[push (x,
+  [push x;
+  load;
+  malloc;
+  bind #x1;
+  push #x1;
+  store;
+  push 1;
+  push #x1;
+  load;
+  less;
+  jtr (
+    [push 0],
+    [push x;
+    load;
+    malloc;
+    bind #x1;
+    push #x1;
+    store;
+    bind f;
+    push f;
+    push f;
+    push x;
+    load;
+    malloc;
+    bind #x1;
+    push #x1;
+    store;
+    push 1;
+    push #x1;
+    load;
+    sub;
+    malloc;
+    call;
+    push #x1;
+    load;
+    add])]
+  );
+bind f;
+push f;
+bind f;
+push f;
+push f;
+push 10;
+malloc;
+call;
+malloc;
+bind #write;
+push #write;
+store;
+push #write;
+load;
+put;
+push #write;
+load;
+unbind;
+pop]

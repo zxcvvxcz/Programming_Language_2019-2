@@ -1,0 +1,16 @@
+(* test case 6 : call by value *)
+
+
+let proc f (a, b) =
+  g(a);
+  g(b);
+  write (a + b)
+in
+let proc g (x) = 
+  write x
+in
+let x := 1 in
+let y := 2 in
+write(f (x, y) + y)
+
+(* Output : prints out "1\n2\n3\n10\n" *)

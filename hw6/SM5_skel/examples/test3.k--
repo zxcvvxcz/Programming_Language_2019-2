@@ -1,0 +1,8 @@
+(* Public test case 3 : scope & call by value *)
+
+let x:=1 in
+let proc inc(n) = x := x + n; write x in
+let x:=0 in
+(inc (5); write x)
+
+(* Output : prints out "0\n" *)

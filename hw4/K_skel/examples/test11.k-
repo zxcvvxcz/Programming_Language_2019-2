@@ -1,0 +1,6 @@
+(*test case 11 : scope & call by value *)
+
+let proc num (x) = x := 1 in
+write num (1)
+
+(* Output : prints out "1\n" *)
