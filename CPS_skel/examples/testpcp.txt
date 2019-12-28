@@ -1,0 +1,6 @@
+
+== CPS-converted Program ==
+fn x_2 => (fn x_13 => (fn x_17 => (x_17) (1)) (fn x_14 => (fn x_16 => (x_16) (2)) (fn x_15 => (x_13) ((x_14 + x_15))))) (fn x_3 => (fn x_5 => (fn x_7 => (x_7) (fn x_8 => (fn x_12 => (x_12) (x_1)) (fn x_9 => (fn x_11 => (x_11) (3)) (fn x_10 => (x_8) ((x_9 + x_10)))))) (fn x_6 => (x_6) (0))) (fn x_4 => (x_2) ((x_3 + x_4))))
+== Running Input Program with M0 Interpreter ==
+6
+== Running converted program with M0 Interpreter ==

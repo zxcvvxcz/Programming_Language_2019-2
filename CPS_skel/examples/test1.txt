@@ -1,0 +1,6 @@
+
+== Input Program ==
+((1 + 2) + (fn f => (f + 3)) (0))
+== Running Input Program with M0 Interpreter ==
+6
+== Running converted program with M0 Interpreter ==
