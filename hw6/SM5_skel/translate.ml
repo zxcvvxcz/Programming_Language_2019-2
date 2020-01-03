@@ -32,24 +32,22 @@ module Translator = struct
        @ trans e2 @ [Sm5.UNBIND; Sm5.POP]
     | K.ASSIGN (x, e) -> trans e @ [Sm5.PUSH (Sm5.Id x); Sm5.STORE; Sm5.PUSH (Sm5.Id x); Sm5.LOAD]
     | K.IF (e_cond, e_true, e_false) -> trans e_cond @ [Sm5.JTR (trans e_true, trans e_false)]
-    | K.WHILE (e_cond, e_body) -> 
-      let _ = name_num := !name_num + 1 in
-      let while_f = String.concat "" ["#while_f"; string_of_int (!name_num)] in
-      [Sm5.PUSH (Sm5.Fn ("#while_x", [Sm5.BIND while_f] @ trans e_cond @ [Sm5.JTR (
-        trans e_body @ [Sm5.PUSH (Sm5.Id while_f); Sm5.PUSH (Sm5.Id while_f)] 
-        @ trans e_cond @ [Sm5.MALLOC; Sm5.CALL], [Sm5.PUSH (Sm5.Val Sm5.Unit)])])); Sm5.BIND while_f; 
-        Sm5.PUSH (Sm5.Id while_f); Sm5.PUSH (Sm5.Id while_f)] @ trans e_cond @ [Sm5.MALLOC; Sm5.CALL];
-    | K.FOR (id, e1, e2, e_body) -> 
-      let _ = name_num := !name_num + 1 in
-      let for_f = String.concat "" ["#for_f"; string_of_int (!name_num)] in
-      trans e2 @ trans e1 @ 
-      [Sm5.MALLOC; Sm5.BIND id; Sm5.PUSH (Sm5.Id id); Sm5.STORE; Sm5.PUSH (Sm5.Id id); Sm5.LOAD; Sm5.LESS;
-      Sm5.PUSH (Sm5.Fn ("#for_x", [Sm5.BIND for_f] @ [
-      Sm5.JTR([Sm5.PUSH (Sm5.Val (Sm5.Unit))], (trans e_body @
-      [Sm5.PUSH (Sm5.Id id); Sm5.LOAD; Sm5.PUSH (Sm5.Val (Sm5.Z 1)); Sm5.ADD; Sm5.PUSH (Sm5.Id id); Sm5.STORE]
-       @ trans e2 @ [Sm5.PUSH (Sm5.Id id); Sm5.LOAD;Sm5.LESS; Sm5.PUSH (Sm5.Id for_f); Sm5.PUSH (Sm5.Id for_f); 
-      Sm5.PUSH(Sm5.Id id); Sm5.LOAD; Sm5.MALLOC; Sm5.CALL]))])); Sm5.BIND for_f ; 
-      Sm5.PUSH (Sm5.Id for_f); Sm5.PUSH (Sm5.Id for_f); Sm5.PUSH (Sm5.Id id); Sm5.LOAD; Sm5.MALLOC; Sm5.CALL]
+    | K.WHILE (e1, e2) ->
+      let f_body = K.IF (e1, K.SEQ (e2, K.CALLV(while_id, K.UNIT)), K.UNIT) in 
+      (trans (K.LETF("#while_f", "#while_x", f_body, K.CALLV (while_id, K.UNIT))))
+    | K.FOR (id, e1, e2, e3) ->
+      let body = K.IF ( K.LESS(K.VAR "#for_iter", K.ADD(K.VAR for_"#for_fin"end, K.NUM 1)), 
+                        K.SEQ (K.SEQ (K.ASSIGN(id, (K.VAR "#for_iter")), e3),
+                          K.SEQ (K.ASSIGN("#for_iter", K.ADD(K.VAR "#for_iter", K.NUM 1)), K.CALLR("#for_id", "#for_iter")
+                          )
+                        ), K.UNIT) in
+      (trans (K.LETV("#for_iter", e1,
+                K.LETV("#for_fin", e2,
+                  K.LETF("#for_id", "#for_iter", body, K.CALLR ("#for_id", "#for_iter"))
+                )
+              )
+            )
+      )
     | K.SEQ (e1, e2) -> trans e1 @ trans e2
     | K.CALLV (f, arg_exp) -> 
       [Sm5.PUSH(Sm5.Id f);Sm5.PUSH(Sm5.Id f)] @ trans arg_exp @ [Sm5.MALLOC; Sm5.CALL;] 
